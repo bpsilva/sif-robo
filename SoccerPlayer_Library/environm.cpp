@@ -1,7 +1,7 @@
 
 #include "environm.h"
 #include "soccerdef.hpp"
-#include <stdlib.h>
+
 //------------------------------------------------------------------------------
 namespace environm {
 

@@ -4,7 +4,7 @@
 
 #include "sock.hpp"
 #include "geom.hpp"
-
+#include <stdlib.h>
 // Classes to simulate a mobile-robot environment.
 //------------------------------------------------------------------------------
 namespace environm {

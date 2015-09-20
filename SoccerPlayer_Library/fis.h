@@ -7,19 +7,27 @@ namespace fis{
 using namespace geom;
 using namespace environm;
 using namespace soccer;
-class fis{
 
-	fis();
-	~fis();
+class fis {
 
-public:
-void fuzzify(point<float> ball, robotBox rb);
-};
+	private:
+		float ballSet[3];
+		float targetSet[3];
+
+	public:
+		fis();
+		~fis();
+
+		void fuzzify(float ballAngle, robotBox rb);
+
+	private:
+		float getBallSetLeft(float ballAngle);
+		float getBallSetFront(float ballAngle);
+		float getBallSetRight(float ballAngle);
+
+
+	};
 
 };//end namespace fis
-
-
-
-
 
 #endif

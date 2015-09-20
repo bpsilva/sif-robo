@@ -87,6 +87,7 @@ namespace fis
 //o  E 0 F   E   E
 //l  F 1 D   F   E
 //a  D 2 D   D   F
+	
 	void fis::infer()
 	{
 		for(int i = 0 ; i < 3 ; i ++)

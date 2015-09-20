@@ -42,25 +42,8 @@ int main( int argc, char* argv[] ) {
         targetAngle = environment.getTargetAngle( environment.getOwnGoal() );
 
         f.fuzzify(ballAngle * (180/M_PI), targetAngle * (180/M_PI));
+        f.infer();
 
-        // A partir dos dados obtidos, deve inferir que ações executar. Neste
-        // exemplo as forcas destinadas a cada robo sao guardadas em leftMotor e
-        // rightMotor. Esta etapa deve ser substituida pelo controlador fuzzy.
-        ballAngle = ballAngle - targetAngle;
-        if ( ballAngle < -M_PI ) {
-            ballAngle += 2 * M_PI;
-        }
-        if ( ballAngle > M_PI ) {
-            ballAngle -= 2 * M_PI;
-        }
-        if ( ballAngle < ( -M_PI / 2 ) ) {
-            ballAngle = -M_PI / 2;
-        }
-        if ( ballAngle > ( M_PI / 2 ) ) {
-            ballAngle = M_PI / 2;
-        }
-        leftMotor  = cos( ballAngle ) - sin( ballAngle );
-        rightMotor = cos( ballAngle ) + sin( ballAngle );
 
 
         // Transmite ação do robô ao ambiente. Fica bloqueado até que todos os

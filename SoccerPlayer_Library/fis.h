@@ -29,7 +29,7 @@ namespace fis	{
 			~fis();
 
 			void fuzzify(float ballAngle, float targetAngle);
-
+			void infer();
 
 		private:
 			float getBallSetLeft(float ballAngle);
@@ -46,7 +46,7 @@ namespace fis	{
 
 			float min(float a, float b);
 			float max(float a, float b, float c);
-			void infer();
+			
 
 
 	};

@@ -28,25 +28,24 @@ namespace fis	{
 			float leftMotor, rightMotor; //[-1 , +1]
 
 		public:
-
+			void setBallSet(float left, float front, float right);
+			void setTargetSet(float left, float front, float right);
 			void fuzzify(float ballAngle, float targetAngle);
 			void infer();
 			void defuzzify();
 			float getLeftMotor();
 			float getRightMotor();
-		//private:
+		private:
+			float getTriangleValue(float angle, float alfa, float beta, float gama);
+
+		protected:
 			float getBallSetLeft(float ballAngle);
 			float getBallSetFront(float ballAngle);
 			float getBallSetRight(float ballAngle);
 
-
 			float getTargetSetLeft(float targetAngle);
 			float getTargetSetFront(float targetAngle);
 			float getTargetSetRight(float targetAngle);
-
-			float getTriangleValue(float angle, float alfa, float beta, float gama);
-
-
 			float min(float a, float b);
 			float max(float a, float b, float c);
 			

@@ -17,14 +17,6 @@ namespace fis
 			targetSet[FRONT] = getTargetSetFront(targetAngle);
 			targetSet[RIGHT] = getTargetSetRight(targetAngle);
 
-			cout<<ballSet[LEFT]<<"\n";
-			cout<<ballSet[FRONT]<<"\n";
-			cout<<ballSet[RIGHT]<<"\n\n";
-
-			cout<<targetSet[LEFT]<<"\n";
-			cout<<targetSet[FRONT]<<"\n";
-			cout<<targetSet[RIGHT]<<"\n";
-
 	}
 
 	float Fis::getBallSetLeft(float ballAngle)
@@ -115,25 +107,13 @@ namespace fis
 		{
 			angle = -180+i*STEPSIZE;
 
-			left[i] = getBallSetLeft(angle);
-			front[i] = getBallSetFront(angle);
-			right[i] = getBallSetRight(angle);
-			if(left[i] > cut[LEFT])
-			{
-				left[i] = cut[LEFT];
-			}
-			if(front[i] > cut[FRONT])
-			{
-				front[i] = cut[FRONT];
-			}
-
-			if(right[i] > cut[RIGHT])
-			{
-				right[i] = cut[RIGHT];
-			}
-
+			left[i] = min(getBallSetLeft(angle), cut[LEFT]);
+			front[i] = min(getBallSetFront(angle), cut[FRONT]);
+			right[i] = min(getBallSetRight(angle), cut[RIGHT]);
+	
 			union_set[i] = max(left[i], front[i], right[i]);
 		}
+	
 		float ac = 0.0;
 		float d = 0.0;
 		for(int i = 0 ; i < steps ; i++)
@@ -165,9 +145,24 @@ namespace fis
 	{
 		return rightMotor;
 	}
+	
 	float Fis::getLeftMotor()
 	{
 		return leftMotor;
+	}
+
+	void Fis::setTargetSet(float left, float front, float right)
+	{
+		targetSet[LEFT] = left;
+		targetSet[FRONT] = front;
+		targetSet[RIGHT] = right;
+	}
+
+	void Fis::setBallSet(float left, float front, float right)
+	{
+		ballSet[LEFT] = left;
+		ballSet[FRONT] = front;
+		ballSet[RIGHT] = right;
 	}
 }
 

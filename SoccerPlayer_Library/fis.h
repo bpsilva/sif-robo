@@ -1,33 +1,43 @@
 #ifndef FIS_H
 #define FIS_H
+
+#include <iostream>
 #include "geom.hpp"
 #include "environm.h"
 
-namespace fis{
-using namespace geom;
-using namespace environm;
-using namespace soccer;
+#define LEFT 0
+#define FRONT 1
+#define RIGHT 2
 
-class fis {
+namespace fis	{
 
-	private:
-		float ballSet[3]; // Left, Front, Right, in that order
-		float targetSet[3]; // Left, Front, Right, in that order
+	using namespace std;
+	using namespace geom;
+	using namespace environm;
+	using namespace soccer;
 
-	public:
-		fis();
-		~fis();
+	class fis {
 
-		void fuzzify(float ballAngle, float targetAngle, robotBox rb);
+		private:
+			float ballSet[3]; // Left, Front, Right, in that order
+			float targetSet[3]; // Left, Front, Right, in that order
 
-	private:
-		float getBallSetLeft(float ballAngle);
-		float getBallSetFront(float ballAngle);
-		float getBallSetRight(float ballAngle);
+		public:
+			fis();
+			~fis();
 
-		float getTargetSetLeft(float targetAngle);
-		float getTargetSetFront(float targetAngle);
-		float getTargetSetRight(float targetAngle);
+			void fuzzify(float ballAngle, float targetAngle);
+
+		private:
+			float getBallSetLeft(float ballAngle);
+			float getBallSetFront(float ballAngle);
+			float getBallSetRight(float ballAngle);
+
+			float getTargetSetLeft(float targetAngle);
+			float getTargetSetFront(float targetAngle);
+			float getTargetSetRight(float targetAngle);
+
+			float getTriangleValue(float angle, float alfa, float beta, float gama);
 
 	};
 };//end namespace fis

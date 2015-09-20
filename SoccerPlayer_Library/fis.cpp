@@ -2,20 +2,12 @@
 
 namespace fis
 {
-	fis::fis()
-	{
-		//do nothing for now
-	}
 
-	fis::~fis()
-	{
-		//do nothing for now
-	}
 
-	void fis::fuzzify(float ballAngle, float targetAngle)
+	void Fis::fuzzify(float ballAngle, float targetAngle)
 	{
 
-		cout << "BallAngle: " << ballAngle << " BallSet: L " << getBallSetLeft(ballAngle) << " F " << getBallSetFront(ballAngle) << " R " << getBallSetRight(ballAngle) << "\n";
+		// cout << "BallAngle: " << ballAngle << " BallSet: L " << getBallSetLeft(ballAngle) << " F " << getBallSetFront(ballAngle) << " R " << getBallSetRight(ballAngle) << "\n";
 			
 			ballSet[LEFT] = getBallSetLeft(ballAngle);
 			ballSet[FRONT] = getBallSetFront(ballAngle);
@@ -25,40 +17,47 @@ namespace fis
 			targetSet[FRONT] = getTargetSetFront(targetAngle);
 			targetSet[RIGHT] = getTargetSetRight(targetAngle);
 
+			cout<<ballSet[LEFT]<<"\n";
+			cout<<ballSet[FRONT]<<"\n";
+			cout<<ballSet[RIGHT]<<"\n\n";
+
+			cout<<targetSet[LEFT]<<"\n";
+			cout<<targetSet[FRONT]<<"\n";
+			cout<<targetSet[RIGHT]<<"\n";
 
 	}
 
-	float fis::getBallSetLeft(float ballAngle)
+	float Fis::getBallSetLeft(float ballAngle)
 	{
 		return getTriangleValue(ballAngle, -190.0f, -180.0f, 0.0f);
 	}
 
-	float fis::getBallSetFront(float ballAngle)
+	float Fis::getBallSetFront(float ballAngle)
 	{
 		return getTriangleValue(ballAngle, -90.0f, 0.0f, 90.0f);
 	}
 
-	float fis::getBallSetRight(float ballAngle)
+	float Fis::getBallSetRight(float ballAngle)
 	{
 		return getTriangleValue(ballAngle, 0.0f, 180.0f, 190.0f);
 	}
 
-	float fis::getTargetSetLeft(float targetAngle)
+	float Fis::getTargetSetLeft(float targetAngle)
 	{
 		return getTriangleValue(targetAngle, -190.0f, -180.0f, 0.0f);
 	}
 
-	float fis::getTargetSetFront(float targetAngle)
+	float Fis::getTargetSetFront(float targetAngle)
 	{
 		return getTriangleValue(targetAngle, -90.0f, 0.0f, 90.0f);
 	}
 
-	float fis::getTargetSetRight(float targetAngle)
+	float Fis::getTargetSetRight(float targetAngle)
 	{
 		return getTriangleValue(targetAngle, 0.0f, 180.0f, 190.0f);
 	}
 
-	float fis::getTriangleValue(float angle, float alpha, float beta, float gamma)
+	float Fis::getTriangleValue(float angle, float alpha, float beta, float gamma)
 	{
 		if (angle <= alpha || angle >= gamma)
 			return 0;
@@ -71,12 +70,12 @@ namespace fis
 	}
 
 
-	float fis::min(float a, float b)
+	float Fis::min(float a, float b)
 	{
 		return (a<b?a:b);
 	}
 
-	float fis::max(float a, float b, float c)
+	float Fis::max(float a, float b, float c)
 	{
 		int max_ab = (a>b?a:b);
 		return (c > max_ab? c :max_ab);
@@ -90,7 +89,7 @@ namespace fis
 //l  F 1 D   F   E
 //a  D 2 D   D   F
 
-	void fis::infer()
+	void Fis::infer()
 	{
 		for(int i = 0 ; i < 3 ; i ++)
 		{
@@ -106,7 +105,7 @@ namespace fis
 
 	}
 
-	void fis::defuzzify()
+	void Fis::defuzzify()
 	{
 		int steps = ((180-(-180))/STEPSIZE) +1;
 		float left[steps], front[steps], right[steps];
@@ -147,7 +146,7 @@ namespace fis
 		setMotorValues(centroid);
 	}
 
-	void fis::setMotorValues(float centroid)
+	void Fis::setMotorValues(float centroid)
 	{
 		float a, b;
 		if(centroid <= 0.0)
@@ -162,11 +161,11 @@ namespace fis
 		}
 	}
 
-	float fis::getRightMotor()
+	float Fis::getRightMotor()
 	{
 		return rightMotor;
 	}
-	float fis::getLeftMotor()
+	float Fis::getLeftMotor()
 	{
 		return leftMotor;
 	}

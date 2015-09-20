@@ -18,7 +18,7 @@ namespace fis	{
 	using namespace environm;
 	using namespace soccer;
 
-	class fis {
+	class Fis {
 
 		private:
 			float ballSet[3]; // Left, Front, Right, in that order
@@ -28,15 +28,13 @@ namespace fis	{
 			float leftMotor, rightMotor; //[-1 , +1]
 
 		public:
-			fis();
-			~fis();
 
 			void fuzzify(float ballAngle, float targetAngle);
 			void infer();
 			void defuzzify();
 			float getLeftMotor();
 			float getRightMotor();
-		private:
+		//private:
 			float getBallSetLeft(float ballAngle);
 			float getBallSetFront(float ballAngle);
 			float getBallSetRight(float ballAngle);

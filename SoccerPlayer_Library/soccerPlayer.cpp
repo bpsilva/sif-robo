@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+using namespace fis;
+
 int main( int argc, char* argv[] ) {
 
     float   ballAngle, targetAngle, leftMotor, rightMotor;
@@ -30,7 +32,7 @@ int main( int argc, char* argv[] ) {
         return 0;  // Cancela operação se não conseguiu conectar-se.
     }
 
-    fis::fis f = fis::fis();
+    Fis f;
 
     // Laço de execução de ações.
     printf( "\nRunning..." );

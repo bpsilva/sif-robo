@@ -19,10 +19,10 @@ namespace fis
 			ballSet[LEFT] = getBallSetLeft(ballAngle);
 			ballSet[FRONT] = getBallSetFront(ballAngle);
 			ballSet[RIGHT] = getBallSetRight(ballAngle);
-		
-			targetSet[LEFT] = getBallSetLeft(ballAngle);
-			targetSet[FRONT] = getBallSetFront(ballAngle);
-			targetSet[RIGHT] = getBallSetRight(ballAngle);
+
+			targetSet[LEFT] = getTargetSetLeft(targetAngle);
+			targetSet[FRONT] = getTargetSetFront(targetAngle);
+			targetSet[RIGHT] = getTargetSetRight(targetAngle);
 
 	}
 
@@ -80,7 +80,7 @@ namespace fis
 		return (c > max_ab? c :max_ab);
 	}
 
-	
+
 //	       alvo
 //       E 	 F   D
 //b      0   1   2
@@ -102,25 +102,4 @@ namespace fis
 		action[2] = max(rules[1][0], rules[2][0], rules[2][1]);
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

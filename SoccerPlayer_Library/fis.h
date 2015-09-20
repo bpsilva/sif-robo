@@ -23,8 +23,8 @@ namespace fis	{
 		private:
 			float ballSet[3]; // Left, Front, Right, in that order
 			float targetSet[3]; // Left, Front, Right, in that order
-			float rules[3][3];
 			float cut[3];// Left, Front, Right, in that order
+			float rules[3][3];
 			float leftMotor, rightMotor; //[-1 , +1]
 
 		public:
@@ -43,6 +43,10 @@ namespace fis	{
 			float getTargetSetLeft(float targetAngle);
 			float getTargetSetFront(float targetAngle);
 			float getTargetSetRight(float targetAngle);
+
+			float getOutputSetLeft(float angle);
+			float getOutputSetFront(float angle);
+			float getOutputSetRight(float angle);
 
 			float getTriangleValue(float angle, float alfa, float beta, float gama);
 

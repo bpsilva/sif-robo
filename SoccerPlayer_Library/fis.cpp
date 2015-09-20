@@ -13,48 +13,6 @@ namespace fis
 		targetSet[RIGHT] = getTargetSetRight(targetAngle);
 	}
 
-	float Fis::getBallSetLeft(float ballAngle)
-	{
-		return getTriangleValue(ballAngle, -190.0f, -180.0f, 0.0f);
-	}
-
-	float Fis::getBallSetFront(float ballAngle)
-	{
-		return getTriangleValue(ballAngle, -90.0f, 0.0f, 90.0f);
-	}
-
-	float Fis::getBallSetRight(float ballAngle)
-	{
-		return getTriangleValue(ballAngle, 0.0f, 180.0f, 190.0f);
-	}
-
-	float Fis::getTargetSetLeft(float targetAngle)
-	{
-		return getTriangleValue(targetAngle, -190.0f, -180.0f, 0.0f);
-	}
-
-	float Fis::getTargetSetFront(float targetAngle)
-	{
-		return getTriangleValue(targetAngle, -90.0f, 0.0f, 90.0f);
-	}
-
-	float Fis::getTargetSetRight(float targetAngle)
-	{
-		return getTriangleValue(targetAngle, 0.0f, 180.0f, 190.0f);
-	}
-
-	float Fis::getTriangleValue(float angle, float alpha, float beta, float gamma)
-	{
-		if (angle <= alpha || angle >= gamma)
-			return 0;
-
-		if (angle >= alpha && angle <= beta)
-			return ((angle - alpha)/(beta - alpha));
-
-		if (angle > beta && angle < gamma)
-			return ((gamma - angle)/(gamma - beta));
-	}
-
 	float Fis::min(float a, float b)
 	{
 		return ((a < b) ? a : b);
@@ -65,7 +23,6 @@ namespace fis
 		float max_ab = ((a > b) ? a : b);
 		return ((c > max_ab) ? c : max_ab);
 	}
-
 
 //	       alvo
 //       E 	 F   D
@@ -100,9 +57,9 @@ namespace fis
 		{
 			angle = -180 + (i * STEPSIZE);
 
-			left[i] = getBallSetLeft(angle);
-			front[i] = getBallSetFront(angle);
-			right[i] = getBallSetRight(angle);
+			left[i] = getOutputSetLeft(angle);
+			front[i] = getOutputSetFront(angle);
+			right[i] = getOutputSetRight(angle);
 
 			if(left[i] > cut[LEFT])
 			{
@@ -123,12 +80,14 @@ namespace fis
 
 		float ac = 0.0;
 		float d = 0.0;
+
 		for(int i = 0 ; i < steps ; i++)
 		{
-			ac += unionSet[i] * (-180 + (i * STEPSIZE));
+			ac += unionSet[i] * (i + 1);
 			d += unionSet[i];
 		}
 		float centroid = ac/d;
+		centroid /= 1.5f;
 
 		setMotorValues(centroid);
 	}
@@ -137,16 +96,8 @@ namespace fis
 	{
 		std::cout << "centroid: " << centroid << std::endl;
 
-		if(centroid <= 0.0)
-		{
-			rightMotor =  ((1-(-centroid/180))*2)-1;
-			leftMotor = 1;
-		}
-		if(centroid >= 0.0)
-		{
-			rightMotor = 1;
-			leftMotor = 2-((centroid/180)*2)-1;
-		}
+		leftMotor  = (cos(centroid) - sin(centroid))/2.5;
+    rightMotor = (cos(centroid) + sin(centroid))/2.5;
 	}
 
 	float Fis::getRightMotor()
@@ -156,5 +107,62 @@ namespace fis
 	float Fis::getLeftMotor()
 	{
 		return leftMotor;
+	}
+
+	float Fis::getBallSetLeft(float ballAngle)
+	{
+		return getTriangleValue(ballAngle, -190.0f, -180.0f, 0.0f);
+	}
+
+	float Fis::getBallSetFront(float ballAngle)
+	{
+		return getTriangleValue(ballAngle, -90.0f, 0.0f, 90.0f);
+	}
+
+	float Fis::getBallSetRight(float ballAngle)
+	{
+		return getTriangleValue(ballAngle, 0.0f, 180.0f, 190.0f);
+	}
+
+	float Fis::getTargetSetLeft(float targetAngle)
+	{
+		return getTriangleValue(targetAngle, -190.0f, -180.0f, 0.0f);
+	}
+
+	float Fis::getTargetSetFront(float targetAngle)
+	{
+		return getTriangleValue(targetAngle, -90.0f, 0.0f, 90.0f);
+	}
+
+	float Fis::getTargetSetRight(float targetAngle)
+	{
+		return getTriangleValue(targetAngle, 0.0f, 180.0f, 190.0f);
+	}
+
+	float Fis::getOutputSetLeft(float angle)
+	{
+		return getTriangleValue(angle, -190.0f, -180.0f, 0.0f);
+	}
+
+	float Fis::getOutputSetFront(float angle)
+	{
+		return getTriangleValue(angle, -90.0f, 0.0f, 90.0f);
+	}
+
+	float Fis::getOutputSetRight(float angle)
+	{
+		return getTriangleValue(angle, 0.0f, 180.0f, 190.0f);
+	}
+
+	float Fis::getTriangleValue(float angle, float alpha, float beta, float gamma)
+	{
+		if (angle <= alpha || angle >= gamma)
+			return 0;
+
+		if (angle >= alpha && angle <= beta)
+			return ((angle - alpha)/(beta - alpha));
+
+		if (angle > beta && angle < gamma)
+			return ((gamma - angle)/(gamma - beta));
 	}
 }

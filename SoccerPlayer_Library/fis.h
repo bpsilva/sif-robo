@@ -9,6 +9,7 @@
 #define FRONT 1
 #define RIGHT 2
 
+#define STEPSIZE 10
 
 namespace fis	{
 
@@ -23,14 +24,18 @@ namespace fis	{
 			float ballSet[3]; // Left, Front, Right, in that order
 			float targetSet[3]; // Left, Front, Right, in that order
 			float rules[3][3];
-			float action[3];// Left, Front, Right, in that order
+			float cut[3];// Left, Front, Right, in that order
+			float leftMotor, rightMotor; //[-1 , +1]
+
 		public:
 			fis();
 			~fis();
 
 			void fuzzify(float ballAngle, float targetAngle);
 			void infer();
-
+			void defuzzify();
+			float getLeftMotor();
+			float getRightMotor();
 		private:
 			float getBallSetLeft(float ballAngle);
 			float getBallSetFront(float ballAngle);
@@ -47,7 +52,7 @@ namespace fis	{
 			float min(float a, float b);
 			float max(float a, float b, float c);
 			
-
+			void setMotorValues(float centroid);
 
 	};
 };//end namespace fis

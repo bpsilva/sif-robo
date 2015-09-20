@@ -43,12 +43,14 @@ int main( int argc, char* argv[] ) {
 
         f.fuzzify(ballAngle * (180/M_PI), targetAngle * (180/M_PI));
         f.infer();
+        f.defuzzify();
 
 
+        std::cout<< "left : " << f.getLeftMotor() << "right: " << f.getRightMotor()<<"\n";
 
         // Transmite ação do robô ao ambiente. Fica bloqueado até que todos os
         // robôs joguem. Se erro, retorna false (neste exemplo, sai do laco).
-        if ( ! environment.act( leftMotor, rightMotor ) ) {
+        if ( ! environment.act( f.getLeftMotor(), f.getRightMotor() ) ) {
             break; // Termina a execução se falha ao agir.
         }
     }

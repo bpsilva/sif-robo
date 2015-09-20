@@ -27,7 +27,7 @@ class fis {
 		fis();
 		~fis();
 
-		void fuzzify(float ballAngle, float targetAngle, robotBox rb);
+		void fuzzify(float ballAngle, float targetAngle);
 
 	private:
 		float getBallSetLeft(float ballAngle);

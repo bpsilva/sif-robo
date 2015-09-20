@@ -19,9 +19,9 @@ namespace fis
 			ballSet[FRONT] = getBallSetFront(ballAngle);
 			ballSet[RIGHT] = getBallSetRight(ballAngle);
 		
-			targetAngle[LEFT] = getBallSetLeft(ballAngle);
-			targetAngle[FRONT] = getBallSetFront(ballAngle);
-			targetAngle[RIGHT] = getBallSetRight(ballAngle);
+			targetSet[LEFT] = getBallSetLeft(ballAngle);
+			targetSet[FRONT] = getBallSetFront(ballAngle);
+			targetSet[RIGHT] = getBallSetRight(ballAngle);
 	}
 
 	float fis::getBallSetLeft(float ballAngle)

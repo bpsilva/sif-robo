@@ -22,7 +22,8 @@ namespace fis	{
 		private:
 			float ballSet[3]; // Left, Front, Right, in that order
 			float targetSet[3]; // Left, Front, Right, in that order
-
+			float rules[3][3];
+			float action[3];// Left, Front, Right, in that order
 		public:
 			fis();
 			~fis();
@@ -41,6 +42,12 @@ namespace fis	{
 			float getTargetSetRight(float targetAngle);
 
 			float getTriangleValue(float angle, float alfa, float beta, float gama);
+
+
+			float min(float a, float b);
+			float max(float a, float b, float c);
+			void infer();
+
 
 	};
 };//end namespace fis

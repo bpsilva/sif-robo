@@ -69,6 +69,41 @@ namespace fis
 	}
 
 
+	float fis::min(float a, float b)
+	{
+		return (a<b?a:b);
+	}
+
+	float fis::max(float a, float b, float c)
+	{
+		int max_ab = (a>b?a:b);
+		return (c > max_ab? c :max_ab);
+	}
+
+	
+//	       alvo
+//       E 	 F   D
+//b      0   1   2
+//o  E 0 F   E   E
+//l  F 1 D   F   E
+//a  D 2 D   D   F
+	void fis::infer()
+	{
+		for(int i = 0 ; i < 3 ; i ++)
+		{
+			for(int j = 0 ; j < 3 ; j++)
+			{
+				rules[i][j] = min(ballSet[i] , targetSet[j]);
+			}
+		}
+
+		action[0] = max(rules[0][1], rules[0][2], rules[1][2]);
+		action[1] = max(rules[0][0], rules[1][1], rules[2][2]);
+		action[2] = max(rules[1][0], rules[2][0], rules[2][1]);
+
+	}
+
+
 
 
 

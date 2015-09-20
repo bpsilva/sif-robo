@@ -2,11 +2,20 @@
 #define FIS_H
 #include "geom.hpp"
 #include "environm.h"
+#define LEFT 0
+#define FRONT 1
+#define RIGHT 2
 
 namespace fis{
+
+
 using namespace geom;
 using namespace environm;
 using namespace soccer;
+
+
+
+
 
 class fis {
 

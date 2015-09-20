@@ -12,9 +12,16 @@ namespace fis
 		//do nothing for now
 	}
 
-	void fis::fuzzify(float ballAngle, float targetAngle, robotBox rb)
+	void fis::fuzzify(float ballAngle, float targetAngle)
 	{
-		//do nothing for now
+		
+			ballSet[LEFT] = getBallSetLeft(ballAngle);
+			ballSet[FRONT] = getBallSetFront(ballAngle);
+			ballSet[RIGHT] = getBallSetRight(ballAngle);
+		
+			targetAngle[LEFT] = getBallSetLeft(ballAngle);
+			targetAngle[FRONT] = getBallSetFront(ballAngle);
+			targetAngle[RIGHT] = getBallSetRight(ballAngle);
 	}
 
 	float fis::getBallSetLeft(float ballAngle)

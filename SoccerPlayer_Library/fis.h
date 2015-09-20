@@ -9,6 +9,7 @@
 #define FRONT 1
 #define RIGHT 2
 
+
 namespace fis	{
 
 	using namespace std;

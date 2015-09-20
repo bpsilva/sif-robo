@@ -14,7 +14,15 @@ namespace fis
 
 	void fis::fuzzify(float ballAngle, float targetAngle)
 	{
+
 		// cout << "BallAngle: " << ballAngle << " BallSet: L " << getBallSetLeft(ballAngle) << " F " << getBallSetFront(ballAngle) << " R " << getBallSetRight(ballAngle) << "\n";
+			ballSet[LEFT] = getBallSetLeft(ballAngle);
+			ballSet[FRONT] = getBallSetFront(ballAngle);
+			ballSet[RIGHT] = getBallSetRight(ballAngle);
+
+			targetAngle[LEFT] = getBallSetLeft(ballAngle);
+			targetAngle[FRONT] = getBallSetFront(ballAngle);
+			targetAngle[RIGHT] = getBallSetRight(ballAngle);
 	}
 
 	float fis::getBallSetLeft(float ballAngle)

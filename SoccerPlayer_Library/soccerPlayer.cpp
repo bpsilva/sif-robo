@@ -48,7 +48,7 @@ int main( int argc, char* argv[] ) {
         f.defuzzify();
 
 
-        std::cout<< "left : " << f.getLeftMotor() << "right: " << f.getRightMotor()<<"\n";
+        std::cout<< "left : " << f.getLeftMotor() << " right: " << f.getRightMotor()<<"\n";
 
         // Transmite ação do robô ao ambiente. Fica bloqueado até que todos os
         // robôs joguem. Se erro, retorna false (neste exemplo, sai do laco).

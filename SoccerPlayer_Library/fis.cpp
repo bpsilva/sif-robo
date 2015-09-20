@@ -2,29 +2,15 @@
 
 namespace fis
 {
-
-
 	void Fis::fuzzify(float ballAngle, float targetAngle)
 	{
+		ballSet[LEFT] = getBallSetLeft(ballAngle);
+		ballSet[FRONT] = getBallSetFront(ballAngle);
+		ballSet[RIGHT] = getBallSetRight(ballAngle);
 
-		// cout << "BallAngle: " << ballAngle << " BallSet: L " << getBallSetLeft(ballAngle) << " F " << getBallSetFront(ballAngle) << " R " << getBallSetRight(ballAngle) << "\n";
-			
-			ballSet[LEFT] = getBallSetLeft(ballAngle);
-			ballSet[FRONT] = getBallSetFront(ballAngle);
-			ballSet[RIGHT] = getBallSetRight(ballAngle);
-
-			targetSet[LEFT] = getTargetSetLeft(targetAngle);
-			targetSet[FRONT] = getTargetSetFront(targetAngle);
-			targetSet[RIGHT] = getTargetSetRight(targetAngle);
-
-			cout<<ballSet[LEFT]<<"\n";
-			cout<<ballSet[FRONT]<<"\n";
-			cout<<ballSet[RIGHT]<<"\n\n";
-
-			cout<<targetSet[LEFT]<<"\n";
-			cout<<targetSet[FRONT]<<"\n";
-			cout<<targetSet[RIGHT]<<"\n";
-
+		targetSet[LEFT] = getTargetSetLeft(targetAngle);
+		targetSet[FRONT] = getTargetSetFront(targetAngle);
+		targetSet[RIGHT] = getTargetSetRight(targetAngle);
 	}
 
 	float Fis::getBallSetLeft(float ballAngle)
@@ -69,16 +55,15 @@ namespace fis
 			return ((gamma - angle)/(gamma - beta));
 	}
 
-
 	float Fis::min(float a, float b)
 	{
-		return (a<b?a:b);
+		return ((a < b) ? a : b);
 	}
 
 	float Fis::max(float a, float b, float c)
 	{
-		int max_ab = (a>b?a:b);
-		return (c > max_ab? c :max_ab);
+		float max_ab = ((a > b) ? a : b);
+		return ((c > max_ab) ? c : max_ab);
 	}
 
 
@@ -99,25 +84,26 @@ namespace fis
 			}
 		}
 
-		cut[0] = max(rules[0][1], rules[0][2], rules[1][2]);
-		cut[1] = max(rules[0][0], rules[1][1], rules[2][2]);
-		cut[2] = max(rules[1][0], rules[2][0], rules[2][1]);
-
+		cut[LEFT] = max(rules[0][1], rules[0][2], rules[1][2]);
+		cut[FRONT] = max(rules[0][0], rules[1][1], rules[2][2]);
+		cut[RIGHT] = max(rules[1][0], rules[2][0], rules[2][1]);
 	}
 
 	void Fis::defuzzify()
 	{
-		int steps = ((180-(-180))/STEPSIZE) +1;
+		int steps = ((180-(-180))/STEPSIZE) + 1;
 		float left[steps], front[steps], right[steps];
-		float union_set[steps];
+		float unionSet[steps];
 		float angle;
+
 		for(int i = 0 ; i < steps ; i++)
 		{
-			angle = -180+i*STEPSIZE;
+			angle = -180 + (i * STEPSIZE);
 
 			left[i] = getBallSetLeft(angle);
 			front[i] = getBallSetFront(angle);
 			right[i] = getBallSetRight(angle);
+
 			if(left[i] > cut[LEFT])
 			{
 				left[i] = cut[LEFT];
@@ -132,14 +118,15 @@ namespace fis
 				right[i] = cut[RIGHT];
 			}
 
-			union_set[i] = max(left[i], front[i], right[i]);
+			unionSet[i] = max(left[i], front[i], right[i]);
 		}
+
 		float ac = 0.0;
 		float d = 0.0;
 		for(int i = 0 ; i < steps ; i++)
 		{
-			ac+= union_set[i]*(i+1);
-			d+= union_set[i];
+			ac += unionSet[i] * (-180 + (i * STEPSIZE));
+			d += unionSet[i];
 		}
 		float centroid = ac/d;
 
@@ -148,7 +135,8 @@ namespace fis
 
 	void Fis::setMotorValues(float centroid)
 	{
-		float a, b;
+		std::cout << "centroid: " << centroid << std::endl;
+
 		if(centroid <= 0.0)
 		{
 			rightMotor =  ((1-(-centroid/180))*2)-1;
@@ -156,8 +144,8 @@ namespace fis
 		}
 		if(centroid >= 0.0)
 		{
-				rightMotor = 1;
-				leftMotor = 2-((centroid/180)*2)-1;
+			rightMotor = 1;
+			leftMotor = 2-((centroid/180)*2)-1;
 		}
 	}
 
@@ -170,5 +158,3 @@ namespace fis
 		return leftMotor;
 	}
 }
-
-	

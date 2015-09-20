@@ -1,6 +1,9 @@
 //------------------------------------------------------------------------------
+#define _USE_MATH_DEFINES
+
 // Inclusão da biblioteca que implementa a interface com o SoccerMatch.
 #include "environm.h"
+#include "fis.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,7 +19,7 @@ int main( int argc, char* argv[] ) {
     if ( argc != 3 ) {
         printf( "\nInvalid parameters. Expecting:" );
         printf( "\nSoccerPlayer SERVER_ADDRESS_STRING SERVER_PORT_NUMBER\n" );
-        printf( "\nSoccerPlayer localhost 1024\n" );        
+        printf( "\nSoccerPlayer localhost 1024\n" );
         return 0;
     }
 
@@ -27,6 +30,8 @@ int main( int argc, char* argv[] ) {
         return 0;  // Cancela operação se não conseguiu conectar-se.
     }
 
+    fis::fis f = fis::fis();
+
     // Laço de execução de ações.
     printf( "\nRunning..." );
     while ( 1 ) {
@@ -36,6 +41,7 @@ int main( int argc, char* argv[] ) {
         ballAngle = environment.getBallAngle();
         targetAngle = environment.getTargetAngle( environment.getOwnGoal() );
 
+        f.fuzzify(ballAngle * (180/M_PI), targetAngle * (180/M_PI));
 
         // A partir dos dados obtidos, deve inferir que ações executar. Neste
         // exemplo as forcas destinadas a cada robo sao guardadas em leftMotor e

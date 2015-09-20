@@ -14,7 +14,8 @@ namespace fis
 
 	void fis::fuzzify(float ballAngle, float targetAngle)
 	{
-		
+
+		// cout << "BallAngle: " << ballAngle << " BallSet: L " << getBallSetLeft(ballAngle) << " F " << getBallSetFront(ballAngle) << " R " << getBallSetRight(ballAngle) << "\n";
 			ballSet[LEFT] = getBallSetLeft(ballAngle);
 			ballSet[FRONT] = getBallSetFront(ballAngle);
 			ballSet[RIGHT] = getBallSetRight(ballAngle);
@@ -22,34 +23,69 @@ namespace fis
 			targetSet[LEFT] = getBallSetLeft(ballAngle);
 			targetSet[FRONT] = getBallSetFront(ballAngle);
 			targetSet[RIGHT] = getBallSetRight(ballAngle);
+
 	}
 
 	float fis::getBallSetLeft(float ballAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(ballAngle, -190.0f, -180.0f, 0.0f);
 	}
 
 	float fis::getBallSetFront(float ballAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(ballAngle, -90.0f, 0.0f, 90.0f);
 	}
 
 	float fis::getBallSetRight(float ballAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(ballAngle, 0.0f, 180.0f, 190.0f);
 	}
 
 	float fis::getTargetSetLeft(float targetAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(targetAngle, -190.0f, -180.0f, 0.0f);
 	}
 
 	float fis::getTargetSetFront(float targetAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(targetAngle, -90.0f, 0.0f, 90.0f);
 	}
+
 	float fis::getTargetSetRight(float targetAngle)
 	{
-		//do nothing for now
+		return getTriangleValue(targetAngle, 0.0f, 180.0f, 190.0f);
 	}
+
+	float fis::getTriangleValue(float angle, float alpha, float beta, float gamma)
+	{
+		if (angle <= alpha || angle >= gamma)
+			return 0;
+
+		if (angle >= alpha || angle <= beta)
+			return ((angle - alpha)/(beta - alpha));
+
+		if (angle > beta || angle < gamma)
+			return ((gamma - angle)/(gamma - beta));
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

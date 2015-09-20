@@ -11,23 +11,25 @@ using namespace soccer;
 class fis {
 
 	private:
-		float ballSet[3];
-		float targetSet[3];
+		float ballSet[3]; // Left, Front, Right, in that order
+		float targetSet[3]; // Left, Front, Right, in that order
 
 	public:
 		fis();
 		~fis();
 
-		void fuzzify(float ballAngle, robotBox rb);
+		void fuzzify(float ballAngle, float targetAngle, robotBox rb);
 
 	private:
 		float getBallSetLeft(float ballAngle);
 		float getBallSetFront(float ballAngle);
 		float getBallSetRight(float ballAngle);
 
+		float getTargetSetLeft(float targetAngle);
+		float getTargetSetFront(float targetAngle);
+		float getTargetSetRight(float targetAngle);
 
 	};
-
 };//end namespace fis
 
 #endif

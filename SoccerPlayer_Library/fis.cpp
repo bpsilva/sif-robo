@@ -12,22 +12,36 @@ namespace fis
 		//do nothing for now
 	}
 
-	void fis::fuzzify(float ballAngle, robotBox rb)
+	void fis::fuzzify(float ballAngle, float targetAngle, robotBox rb)
 	{
 		//do nothing for now
 	}
 
-	float getBallSetLeft(float ballAngle)
+	float fis::getBallSetLeft(float ballAngle)
 	{
 		//do nothing for now
 	}
 
-	float getBallSetFront(float ballAngle)
+	float fis::getBallSetFront(float ballAngle)
 	{
 		//do nothing for now
 	}
 
-	float getBallSetRight(float ballAngle)
+	float fis::getBallSetRight(float ballAngle)
+	{
+		//do nothing for now
+	}
+
+	float fis::getTargetSetLeft(float targetAngle)
+	{
+		//do nothing for now
+	}
+
+	float fis::getTargetSetFront(float targetAngle)
+	{
+		//do nothing for now
+	}
+	float fis::getTargetSetRight(float targetAngle)
 	{
 		//do nothing for now
 	}

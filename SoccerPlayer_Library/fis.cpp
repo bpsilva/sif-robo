@@ -75,18 +75,22 @@ namespace fis
 
 		for(int i = 0 ; i < steps ; i++)
 		{
-			ac += unionSet[i] * (i + 1);
+		
+			ac += unionSet[i] * (-180 + (i * STEPSIZE));
 			d += unionSet[i];
-		}
-		float centroid = ac/d;
-		centroid /= 1.5f;
+		}	
 
+		float centroid = ac/d;
+	
 		setMotorValues(centroid);
 	}
 
 	void Fis::setMotorValues(float centroid)
 	{
+
 		std::cout << "centroid: " << centroid << std::endl;
+		centroid = centroid*(M_PI/180);
+
 
 		leftMotor  = (cos(centroid) - sin(centroid))/2.5;
     	rightMotor = (cos(centroid) + sin(centroid))/2.5;

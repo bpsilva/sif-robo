@@ -13,7 +13,7 @@ using namespace fis;
 
 int main( int argc, char* argv[] ) {
 
-    float   ballAngle, targetAngle, leftMotor, rightMotor;
+    float ballAngle, targetAngle, ballDistance, leftMotor, rightMotor;
 
     // Declaração do objeto que representa o ambiente.
     environm::soccer::clientEnvironm environment;
@@ -37,13 +37,13 @@ int main( int argc, char* argv[] ) {
     // Laço de execução de ações.
     printf( "\nRunning..." );
     while ( 1 ) {
-
         // Deve obter os dados desejados do ambiente. Métodos do clientEnvironm.
         // Exemplos de métodos que podem ser utilizados.
         ballAngle = environment.getBallAngle();
         targetAngle = environment.getTargetAngle( environment.getOwnGoal() );
+        ballDistance = environment.getDistance();
 
-        f.fuzzify(ballAngle * (180/M_PI), targetAngle * (180/M_PI));
+        f.fuzzify(ballAngle * (180/M_PI), targetAngle * (180/M_PI), ballDistance);
         f.infer();
         f.defuzzify();
 

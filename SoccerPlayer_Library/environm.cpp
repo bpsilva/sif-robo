@@ -593,7 +593,7 @@ void environm::nearestObstacles( ) {
             if ( ( robot[index].pos - tempPoint ).size() <= collision ) {
                 collision = ( robot[index].pos - tempPoint ).size();
                 robot[index].obstacle = tempPoint;
-            }              
+            }
             // Right goal top corner.
             tempPoint.x = +worldWidth;
             tempPoint.y = +goalLength;
